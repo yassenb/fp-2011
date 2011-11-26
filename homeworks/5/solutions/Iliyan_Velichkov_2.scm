@@ -1,0 +1,6 @@
+(define (flatten ll)
+  (cond ((null? ll) '())
+        ((list? (car ll))  (append (flatten (car ll)) (flatten (cdr ll))))
+        (else (cons (car ll) (flatten (cdr ll))))
+        )
+  )
