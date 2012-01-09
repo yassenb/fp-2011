@@ -1,0 +1,10 @@
+; както Йордан Стефанов хитро се е сетил може и просто да ползвате flatten от другата задача за домашно :)
+
+(define (my-append ls)
+  (if (null? ls)
+    '()
+    (let ((h (car ls))
+          (t (cdr ls)))
+      (if (null? h)
+        (my-append t)
+        (cons (car h) (my-append (cons (cdr h) t)))))))

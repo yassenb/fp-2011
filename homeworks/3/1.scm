@@ -1,0 +1,6 @@
+(define (predicate-combiner pred1? pred2? boolean-operator)
+  (define (result-pred? x)
+    (if (eq? boolean-operator 'and)
+      (and (pred1? x) (pred2? x))
+      (or (pred1? x) (pred2? x))))
+  result-pred?)

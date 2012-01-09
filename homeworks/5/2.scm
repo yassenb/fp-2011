@@ -1,0 +1,6 @@
+(define (flatten l)
+  (define (helper l flat-tail)
+    (cond ((eq? l '()) flat-tail)
+          ((not (pair? l)) (cons l flat-tail))
+          (else (helper (car l) (helper (cdr l) flat-tail)))))
+  (helper l '()))
