@@ -1,0 +1,27 @@
+; 0.9 (6)
+
+(define (component node edgeList)
+  (define (subComponent result edgeList)
+    (if (= (length result)
+           (length (levelSubComponent result edgeList)))
+        result
+        (subComponent (levelSubComponent result edgeList) edgeList)))
+
+  (define (levelSubComponent myComp edgeList)
+    (unique
+     (foldr (lambda (x rList)
+              (cons (car x) (cons (cdr x) rList)))
+            '()
+            (filter (lambda (x)
+                      (or (member (car x) myComp)
+                          (member (cdr x) myComp))) edgeList))))
+
+  (define (unique l)
+    (foldr (lambda (x rList)
+             (if (member x rList)
+                 rList
+                 (cons x rList))) '() l))
+
+
+  (subComponent (list node) edgeList)
+)

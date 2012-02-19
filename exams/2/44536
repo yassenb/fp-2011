@@ -1,0 +1,62 @@
+; 0.7 (5)
+
+; end_l = spisak na varhovete, koito sme posetili
+; curr_l = spisak na tekustite varhove
+; G = tekustia graf
+;
+
+
+(define (f end_l curr_l G)
+    (if (eq? curr_l '())
+        end_l
+        (
+            (let*
+                (
+                (curr_v (car curr_l))
+                ; Namirane vsi4ki sasedi na parvia tekusht vrah
+                (neigh (map
+                    (lambda (rib)
+                        (if
+                            (equal? (car rib) curr_v)
+                            (cadr rib)
+                            (car rib)
+                        )
+                    )
+                    ; Namira vsi4ki rebra sadarjashti curr_v
+                    (filter
+                               (lambda (rib)
+                                   (or
+                                       (equal? (car rib) curr_v)
+                                       (equal? (cadr rib) curr_v)
+                                   )
+                               )
+                              G
+                    )
+
+                )
+                )
+                )
+                ; kodat na let*
+                (f
+                    (cons curr_v end_l)
+                    ; tuka trqbwa da ima union
+                    (union (cdr curr_l) neigh)
+                    ; mahame ot G vsi4ki rebra, koito sadarshat curr_v
+                    (filter
+                        (lambda (rib)
+                            (and
+                                (not (equal? (car rib) curr_v))
+                                (not (equal? (cadr rib) curr_v))
+                            )
+                        )
+                        G
+                    )
+                )
+             )
+         )
+    )
+)
+
+(define (component v G)
+    (f '() (list v) G)
+)

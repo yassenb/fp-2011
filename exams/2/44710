@@ -1,0 +1,24 @@
+; 0.2 (3)
+; 44710
+
+(define graph (list (cons 1 2) (cons 1 4) (cons 2 3) (cons 2 4) (cons 5 6) (cons 5 7)))
+
+(define (remove-duplicates l)
+  (cond ((null? l) '())
+        ((member (car l) (cdr l)) (remove-duplicates (cdr l)))
+        (else (cons (car l) (remove-duplicates (cdr l))))))
+
+(define (getE v g)
+  (cond ((null? g) '())
+        ((eq? (caar g) v) (cons (car g) (getE v (cdr g))))
+        (else (getE v (cdr g)))))
+
+(define (component v g)
+  (define (help e res rest)
+    (if (null? res)
+        (remove-duplicates res)
+        (begin (append res (map cdr (getE e g))) (help (car rest) (cdr rest)))
+    ))
+  (help v (list v) g)
+    )
+(component 5 graph)

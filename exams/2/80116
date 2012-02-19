@@ -1,0 +1,15 @@
+; 0 (2)
+
+(define (G '((1 4) (4 3) (3 2) (3 1) (5 6) (6 7) (7 8))))
+
+(define (search v G new)
+  (if (null? G) '())
+  (append v new)
+  (if ((= v (car(car G))))
+      (search (cdr(car G)) G new)
+  (if ((= v (cdr(car G))))
+      (search (car(car G)) G new))))
+
+
+(define (component v G)
+  (search v G '()))

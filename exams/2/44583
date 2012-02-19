@@ -1,0 +1,17 @@
+; 0.1
+
+(define (getElemCh elem myGraph);vrashta spisak s prekite naslednici na varha elem v grafa myGraph
+  (if (= elem 1) (car myGraph)
+      (getElemCh (- elem 1) (cdr myGraph))))
+(define (isElem e l)
+  (cond ((null? l) #f)
+        ((= (car l) e) #t)
+        (else (isElem e (cdr l)))))
+(define (component G1 v1)
+  (define (addNoDubl list1 res)
+    (cond ((memv (car list1) res)
+        (cons (car list1) res) (addNoDubl (cdr list1) res))
+        (else (addNoDubl (cdr list1) res))
+    )
+  )
+ ; ....

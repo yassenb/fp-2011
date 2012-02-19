@@ -1,0 +1,21 @@
+; 0.1 (2)
+
+(define (component v G)
+  (define (neightbours v)
+    (filter (lambda (pair)
+              (eq? (car pair) v)) G))
+  (define (isInList? v list)
+    (not (null?
+              (filter (lambda (v1)
+                        (eq? v v1)) list)
+              )))
+  (define (find_comp curV curComp)
+    (append curComp
+     (filter (lambda (v)
+              (isInList? v curComp))
+            (neightbours curV))
+     ))
+  ;not full
+  ;sample exec not the final solution
+  (find_comp v '())
+  )

@@ -1,0 +1,27 @@
+; 0.1 (2)
+; Никола Филчев
+
+;imame graf kato spisyk ot rebra
+'((1 2) (2 3) (1 3))
+
+;osnovnata funkciq, izvikva funkciqta graf s edin parametyr pove4e (spisyk ot elementi, do koito ima pyt)
+(define (main G x)
+  (graf G x '(x)))
+
+;v dadena dvoika (x,y) ili (y,x) vry6ta drugiq element otnosno x
+(define (other L x)
+  (if (= (car L) x)
+      (cadr L)
+  (car L)))
+
+;za vseki element na L dobavi vsi4ki other-elementi ot G
+(define (graf G x L)
+  (map (other-g
+.....
+;... tova kato zavyr6i 6te imame v G vsi4ki elementi, no 6te se povtarqt i 6te trqbva da gi filtrirame)
+
+;za tekushtiq element dobavi vsi4ki other-elementi ot G v L
+(define (other-g x G L)
+  (if(member? x (car G))
+     (other-g x (cdr G) (append L (other (car G) x)))
+  (other-x G (cdr G))))

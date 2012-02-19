@@ -1,0 +1,22 @@
+; 0.1 (2)
+
+(define ( component  v G)
+  (define(insert! key b f)
+    (let(( l (assq key (cdr f))))
+      (cond((null? l) '())
+           ((equal? b (caar l)) l)
+           (else (insert! key b (cdr l)))
+      )
+      l
+    )
+  )
+  (define ll '())
+  (let ((z (assq key (cdr f))))
+    (cond((null? f) '())
+       ((equal? v (caar z)) (insert! z v  ll))
+       (else  (component v (cdr z)))
+    )
+    ll
+  )
+)
+
